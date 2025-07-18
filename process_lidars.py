@@ -101,7 +101,7 @@ def dual_doppler_rec(files1,files2, range1, range2,time_step,save_path,logfile_m
         else:
             lidar2=l2
 
-    lproc = ddp.Dual_Doppler_Processing(lidar1,lidar2,range1, range2)
+    lproc = ddp.Dual_Doppler_Processing(lidar1,lidar2,range1, range2, config)
     u,v=lproc.wind_velocity()
     ws,wd=lproc.wind_speed_direction(u,v)
     
@@ -118,7 +118,7 @@ def dual_doppler_rec(files1,files2, range1, range2,time_step,save_path,logfile_m
                       'description':'Dual-Doppler velocity reconstruction from stare files. Vertical velocity is neglected.',
                       'contact':'stefano.letizia@nrel.gov'}
         
-        output.to_netcdf(os.path.join(save_path,filename))     
+        output.to_netcdf(os.path.join(save_path,filename))
         
         #plots
         lproc.plot_velocities(u,v)
